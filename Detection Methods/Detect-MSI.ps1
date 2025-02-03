@@ -2,7 +2,7 @@
 $applicationname = "DotNetHostingCore"
 $version = "3.1.8"
 $packageversion = "R1"
-$msiproductcode = "{96d460cd-7378-4cf4-9af6-0aed85bac49e}"
+$msiproductcode = "{7186a742-a2d9-4dab-80df-80aa5e8013e3}"
 
 # Ensure the script runs in a 64-bit PowerShell environment
 if (-not ([Environment]::Is64BitProcess)) {
