@@ -3,6 +3,7 @@ $applicationname = "DotNetHostingCore"
 $version = "3.1.8"
 $packageversion = "R1"
 $msiproductcode = "{7186a742-a2d9-4dab-80df-80aa5e8013e3}"
+$date = Get-Date -Format "yyyy-MM-dd"
 
 # Ensure the script runs in a 64-bit PowerShell environment
 if (-not ([Environment]::Is64BitProcess)) {
@@ -13,7 +14,7 @@ if (-not ([Environment]::Is64BitProcess)) {
 }
 
 # Log file path
-$logFile = "$env:WINDIR\temp\Detect-$applicationname-V$version-$packageversion.log"
+$logFile = "$env:WINDIR\temp\Detect-$applicationname-V$version-$packageversion-$date.log"
 
 # Function to log messages
 
