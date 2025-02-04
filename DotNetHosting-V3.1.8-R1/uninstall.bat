@@ -1,0 +1,1 @@
+"C:\ProgramData\Package Cache\{7186a742-a2d9-4dab-80df-80aa5e8013e3}\WindowsServerHostingBundle.exe"  /uninstall /passive
