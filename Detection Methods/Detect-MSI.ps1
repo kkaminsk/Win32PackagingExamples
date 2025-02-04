@@ -32,8 +32,8 @@ $regPaths =
 # Start logging
 Write-Log "Checking for $applicationname-V$version..."
 Write-Host "Checking for $applicationname-V$version..."
-Write-Log "Verifying Product Code: $msiProductCode"
-Write-Host "Verifying Product Code: $msiProductCode"
+Write-Log "Verifying MSI Product Code: $msiProductCode"
+Write-Host "Verifying MSI Product Code: $msiProductCode"
 $foundProduct = $false
 
 foreach ($regPath in $regPaths) {
