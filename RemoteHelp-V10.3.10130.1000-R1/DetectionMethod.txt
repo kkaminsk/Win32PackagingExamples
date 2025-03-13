@@ -1,0 +1,2 @@
+C:\Program Files\Remote Help
+RemoteHelp.exe=10.3.10130.1000

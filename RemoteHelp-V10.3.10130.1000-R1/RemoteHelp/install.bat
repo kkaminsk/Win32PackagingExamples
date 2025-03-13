@@ -1,0 +1,1 @@
+%~dp0remotehelpinstaller.exe /quiet acceptTerms=1

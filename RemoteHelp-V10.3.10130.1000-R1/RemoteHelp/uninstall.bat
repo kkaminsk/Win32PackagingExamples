@@ -1,0 +1,1 @@
+%~dp0remotehelpinstaller.exe /uninstall /quiet acceptTerms=1
