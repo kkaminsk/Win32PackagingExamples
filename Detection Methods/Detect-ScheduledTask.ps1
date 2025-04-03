@@ -1,6 +1,6 @@
 # Fill in the $taskName and $msiProductCode variables
 $taskName = "ChangeMeTask"
-$version = "3.1.8"
+$version = "1.0"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"
 
