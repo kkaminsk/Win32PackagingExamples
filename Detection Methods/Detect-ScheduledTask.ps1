@@ -1,4 +1,4 @@
-# Fill in the $taskName and $msiProductCode variables
+# Fill in the $taskName variable
 $taskName = "ChangeMeTask"
 $version = "1.0"
 $packageversion = "R1"
