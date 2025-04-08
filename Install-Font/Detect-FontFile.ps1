@@ -1,83 +1,42 @@
-# Some fonts do not register in the registry, so we need to check the file system instead.
-# Define application details
-$applicationname = "Detect-Lockscreen"  
-$version = "1.0" 
+# Using this method to check for fonts you can search the registry as well.
+# Also if you find difficulty with this script you might have to use the Detect-FontFile.ps1 script to check for the font file in the system.
+# Fill in the variables below as needed.
+$applicationname = "Detect-RobotoFontFile"
 $packageversion = "R1"
-# Define the target file path
-$file = "C:\Windows\Web\Wallpaper\Lockscreen-v1.jpg"
+$date = Get-Date -Format "yyyy-MM-dd"
+$FontPath = ".\Roboto.ttf"
+$FontName = "Roboto.ttf"
+$FontsFolder = "$env:windir\Fonts"
+$FontsFolderPath = "$FontsFolder\$FontName"
 
-# Define registry path
-$registryPath = "HKLM:\Software\BigHatGroup\$applicationname"
+# Ensure the script runs in a 64-bit PowerShell environment
+if (-not ([Environment]::Is64BitProcess)) {
+    Write-Host "Switching to 64-bit PowerShell..."
+    Start-Process -FilePath "$env:WINDIR\SysNative\WindowsPowerShell\v1.0\powershell.exe" `
+        -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
 
 # Log file path
-$logFile = "$env:WINDIR\temp\$applicationname-V$version-$packageversion.log" 
+$logFile = "$env:WINDIR\temp\Detect-$applicationname-$packageversion-$date.log"
 
 # Function to log messages
 function Write-Log {
-    param ([string]$message)
+    param ([string]$Message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    "$timestamp - $message" | Out-File -FilePath $logFile -Append
+    "$timestamp - $Message" | Out-File -FilePath $logFile -Append
 }
 
-Write-Log "Searching for $file."
-Write-Host "Searching for $file."
+# Start logging
+Write-Log "Checking for font TTF file $FontsFolderPath..."
+Write-Host "Checking for font TTF file $FontsFolderPath..."
 
-# Read and compare version from the registry
-if (Test-Path -Path $registrypath) {
-    $existingversion = (Get-ItemProperty -Path $registrypath -Name "Version" -ErrorAction SilentlyContinue).Version
-    if ($ExistingVersion) {
-        Write-Log "Existing version found in registry: $existingversion"
-        Write-Host "Existing version found in registry: $existingversion"
-        exit 0
-
-        if ([version]$version -le [version]$existingversion) {
-            Write-Log "Current version ($version) is not greater than existing version ($existingversion). Exiting."
-            Write-Host "Current version ($version) is not greater than existing version ($existingversion). Exiting."
-            exit 1
-        }
-    } else {
-        Write-Log "No existing version found in registry."
-        Write-Host "No existing version found in registry."
-        exit 1
-    }
-} else {
-    Write-Log "Registry path does not exist: $registrypath"
-    Write-Host "Registry path does not exist: $registrypath"
-}
-
-# Read and compare package version from the registry
-if (Test-Path -Path $registrypath) {
-    $existingpackageVersion = (Get-ItemProperty -Path $registrypath -Name "PackageVersion" -ErrorAction SilentlyContinue).PackageVersion
-    if ($existingpackageVersion) {
-        Write-Log "Existing package version found in registry: $existingpackageversion"
-        Write-Host "Existing package version found in registry: $existingpackageversion"
-
-        # Extract numeric part of package versions for comparison
-        $existingversionnumber = [int]($existingpackageversion -replace "[^0-9]", "")
-        $currentversionnumber = [int]($packageversion -replace "[^0-9]", "")
-
-        if ($currentversionnumber -le $existingversionnumber) {
-            Write-Log "Current package version ($packageversion) is not greater than existing package version ($existingpackageversion). Exiting."
-            Write-Host "Current package version ($packageversion) is not greater than existing package version ($existingpackageversion). Exiting."
-            exit 1
-        }
-    } else {
-        Write-Log "No existing package version found in registry."
-        Write-Host "No existing package version found in registry."
-        exit 1
-    }
-} else {
-    Write-Log "Registry path does not exist: $registrypath"
-    Write-Host "Registry path does not exist: $registrypath"
-}
-
-# Check if the lock screen image exists
-if (Test-Path -Path $lockscreenFile) {
-    Write-Log "File exists: $file"
-    Write-Host "File exists: $file"
-    exit 0
-} else {
-    Write-Log "File NOT found: $file"
-    Write-Host "File NOT found: $file"
+if (-Not (Test-Path -Path $FontsFolderPath -PathType Leaf)) {
+    Write-Error "No TTF file found in $FontsFolderPath"
     exit 1
+}
+else {
+    Write-Host "Font file found at $FontsFolderPath"
+    Write-Log "Font file found at $FontsFolderPath"
+    Exit 0 # Success
 }
