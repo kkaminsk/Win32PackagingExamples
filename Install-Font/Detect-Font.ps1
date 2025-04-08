@@ -1,9 +1,9 @@
+# Using this method to check for fonts as not everything registers in the registry.
 # Fill in the variables below as needed.
 $applicationname = "Detect-RobotoFont"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"
-$FontName = "Roboto (TrueType)"  # Use the display name as seen in Fonts settings
-$regPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+$FontToCheck = "Roboto"  # Just the font family name
 
 # Ensure the script runs in a 64-bit PowerShell environment
 if (-not ([Environment]::Is64BitProcess)) {
@@ -24,15 +24,17 @@ function Write-Log {
 }
 
 # Start logging
-Write-Log "Checking for $applicationname-R$packageversion..."
-Write-Host "Checking for $applicationname-R$packageversion..."
-Write-Log "Verifying source file: "$FontPath""
-Write-Host "Verifying source file: "$FontPath""
+Write-Log "Checking for font $fonttocheck..."
+Write-Host "Checking for font $fonttocheck..."
 
-if (Get-ItemProperty -Path $regPath -Name $FontName -ErrorAction SilentlyContinue) {
-    Write-Output "Font '$FontName' is installed."
+Add-Type -AssemblyName System.Drawing
+$fonts = New-Object System.Drawing.Text.InstalledFontCollection
+$fontNames = $fonts.Families | ForEach-Object { $_.Name }
+
+if ($fontNames -contains $FontToCheck) {
+    Write-Output "Font '$FontToCheck' is installed."
     exit 0
 } else {
-    Write-Output "Font '$FontName' is NOT installed."
+    Write-Output "Font '$FontToCheck' is NOT installed."
     exit 1
 }
