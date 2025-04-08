@@ -33,8 +33,10 @@ $fontNames = $fonts.Families | ForEach-Object { $_.Name }
 
 if ($fontNames -contains $FontToCheck) {
     Write-Output "Font '$FontToCheck' is installed."
+    Write-Log "Font '$FontToCheck' is installed."
     exit 0
 } else {
     Write-Output "Font '$FontToCheck' is NOT installed."
+    Write-Log "Font '$FontToCheck' is NOT installed."    
     exit 1
 }
