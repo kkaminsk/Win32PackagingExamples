@@ -1,8 +1,13 @@
+# Using this method to check for fonts on the system via COM you can search the file system as well.
+# If you find difficulty with this script you might have to use the Detect-FontFile.ps1.
+
 # Fill in the variables below as needed.
 $applicationname = "Detect-RobotoFont"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"
 $FontName = "Roboto (TrueType)"  # Use the display name as seen in Fonts settings
+
+#Leave as-is
 $regPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
 
 # Ensure the script runs in a 64-bit PowerShell environment

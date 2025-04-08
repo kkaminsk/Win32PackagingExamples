@@ -1,5 +1,5 @@
 # Using this method to check for fonts you can search the registry as well.
-# Also if you find difficulty with this script you might have to use the Detect-Font.ps1.
+# If you find difficulty with this script you might have to use the Detect-Font.ps1.
 
 # Fill in the variables below as needed.
 $applicationname = "Detect-RobotoFontFile"
