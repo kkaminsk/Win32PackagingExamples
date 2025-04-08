@@ -1,5 +1,5 @@
 # Fill in the $taskName variable
-$taskName = "ChangeMeTask"
+$taskName = "Detect-ChangeMeTask"
 $version = "1.0"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"

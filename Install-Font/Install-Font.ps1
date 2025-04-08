@@ -1,4 +1,4 @@
-# Fill in the $applicationname and $msiProductCode variables
+# Fill in the variables below as needed.
 $applicationname = "RobotoFont-Installer"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"

@@ -1,5 +1,5 @@
 # Fill in the $applicationname and $msiProductCode variables
-$applicationname = "DotNetHostingCore"
+$applicationname = "Detect-DotNetHostingCore"
 $version = "3.1.8"
 $packageversion = "R1"
 $msiproductcode = "{7186a742-a2d9-4dab-80df-80aa5e8013e3}"
