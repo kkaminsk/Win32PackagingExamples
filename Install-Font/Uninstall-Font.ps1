@@ -27,14 +27,16 @@ function Write-Log {
 }
 
 # Start logging
-Write-Log "Verifying source file: "$FontPath""
-Write-Host "Verifying source file: "$FontPath""
+Write-Log "Removing file: "$FontPath""
+Write-Host "Removing file: "$FontPath""
 
 # Remove the font from the Fonts folder
 try {
-    Remove-Item -Path $FontPath -ErrorAction Stop
+    Remove-Item -Path $FontPath -Force
+    Write-Host "Removed the font file from '$FontPath'."
+    Write-Log "Removed the font file from '$FontPath'."
 } catch {
     Write-Host "Failed to remove the font file from '$FontPath'."
-    Write-Log "Failed to copy the font file from '$FontPath'."
+    Write-Log "Failed to remove the font file from '$FontPath'."
     exit 1 # Failure to remove the font
 }
