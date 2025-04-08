@@ -1,10 +1,13 @@
 # Using this method to check for fonts you can search the registry as well.
-# Also if you find difficulty with this script you might have to use the Detect-FontFile.ps1 script to check for the font file in the system.
+# Also if you find difficulty with this script you might have to use the Detect-Font.ps1.
+
 # Fill in the variables below as needed.
 $applicationname = "Detect-RobotoFontFile"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"
 $FontName = "Roboto.ttf"
+
+# Leave as-is
 $FontsFolder = "$env:windir\Fonts"
 $FontsFolderPath = "$FontsFolder\$FontName"
 
