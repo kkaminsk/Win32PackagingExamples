@@ -1,9 +1,13 @@
-# Using this method to check for fonts as not everything registers in the registry.
+# Using this method to check for fonts you can search the registry as well.
+# Also if you find difficulty with this script you might have to use the Detect-FontFile.ps1 script to check for the font file in the system.
 # Fill in the variables below as needed.
-$applicationname = "Detect-RobotoFont"
+$applicationname = "Detect-RobotoFontFile"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"
-$FontToCheck = "Roboto"  # Just the font family name
+$FontPath = ".\Roboto.ttf"
+$FontName = "Roboto.ttf"
+$FontsFolder = "$env:windir\Fonts"
+$FontsFolderPath = "$FontsFolder\$FontName"
 
 # Ensure the script runs in a 64-bit PowerShell environment
 if (-not ([Environment]::Is64BitProcess)) {
@@ -24,19 +28,15 @@ function Write-Log {
 }
 
 # Start logging
-Write-Log "Checking for font $fonttocheck..."
-Write-Host "Checking for font $fonttocheck..."
+Write-Log "Checking for font TTF file $FontsFolderPath..."
+Write-Host "Checking for font TTF file $FontsFolderPath..."
 
-Add-Type -AssemblyName System.Drawing
-$fonts = New-Object System.Drawing.Text.InstalledFontCollection
-$fontNames = $fonts.Families | ForEach-Object { $_.Name }
-
-if ($fontNames -contains $FontToCheck) {
-    Write-Output "Font '$FontToCheck' is installed."
-    Write-Log "Font '$FontToCheck' is installed."
-    exit 0
-} else {
-    Write-Output "Font '$FontToCheck' is NOT installed."
-    Write-Log "Font '$FontToCheck' is NOT installed."    
+if (-Not (Test-Path -Path $FontsFolderPath -PathType Leaf)) {
+    Write-Error "No TTF file found in $FontsFolderPath"
     exit 1
+}
+else {
+    Write-Host "Font file found at $FontsFolderPath"
+    Write-Log "Font file found at $FontsFolderPath"
+    Exit 0 # Success
 }
