@@ -1,7 +1,6 @@
 # Fill in the $applicationname and $msiProductCode variables
-$applicationname = "RobotoFont"
+$applicationname = "RobotoFont-Installer"
 $packageversion = "R1"
-$FontName = "YoutFont.ttf"
 $date = Get-Date -Format "yyyy-MM-dd"
 $FontPath = ".\Roboto.ttf"
 $FontName = "Roboto.ttf"
@@ -19,7 +18,6 @@ if (-not ([Environment]::Is64BitProcess)) {
 $logFile = "$env:WINDIR\temp\Detect-$applicationname-$packageversion-$date.log"
 
 # Function to log messages
-
 function Write-Log {
     param ([string]$Message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -37,7 +35,7 @@ try {
 } catch {
     Write-Host "Font file not found at $FontPath"
     Write-Log "Font file not found at $FontPath"
-    exit 2
+    exit 2 # Failure to find the font source file
 }
 
 # Copy the font to the Fonts folder
@@ -46,7 +44,7 @@ try {
 } catch {
     Write-Host "Failed to copy the font file from '$FontPath' to '$FontsFolder'."
     Write-Log "Failed to copy the font file from '$FontPath' to '$FontsFolder'."
-    exit 1
+    exit 1 # Failure to copy the font
 }
 
 Write-Host "Copied the font file from '$FontPath' to '$FontsFolder'."
@@ -73,9 +71,11 @@ if (Test-Path -Path $FontPath -PathType Leaf) {
     exit 0
     Write-Host "Font is installed successfully."
     Write-Log "Font is installed successfully."
+    Write-Log "Font path exists: $FontDestPath"
 } else {
     Write-Error "Font path not found: $FontDestPath"
     Write-Host "Font installation failed."
     Write-Log "Font installation failed."
+    Write-Log "Font path not found: $FontDestPath"
     exit 1
 }
