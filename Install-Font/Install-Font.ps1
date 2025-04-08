@@ -15,7 +15,7 @@ if (-not ([Environment]::Is64BitProcess)) {
 }
 
 # Log file path
-$logFile = "$env:WINDIR\temp\Detect-$applicationname-$packageversion-$date.log"
+$logFile = "$env:WINDIR\temp\Install-$applicationname-$packageversion-$date.log"
 
 # Function to log messages
 function Write-Log {
