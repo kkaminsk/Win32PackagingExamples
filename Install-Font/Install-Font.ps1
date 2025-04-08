@@ -40,7 +40,7 @@ try {
 
 # Copy the font to the Fonts folder
 try {
-    Copy-Item -Path $FontPath -Destination $FontsFolder -ErrorAction Stop
+    Copy-Item -Path $FontPath -Destination $FontsFolder -Force
 } catch {
     Write-Host "Failed to copy the font file from '$FontPath' to '$FontsFolder'."
     Write-Log "Failed to copy the font file from '$FontPath' to '$FontsFolder'."
