@@ -24,15 +24,15 @@ function Write-Log {
 }
 
 # Start logging
-Write-Log "Checking for $applicationname-R$packageversion..."
-Write-Host "Checking for $applicationname-R$packageversion..."
-Write-Log "Verifying source file: "$FontPath""
-Write-Host "Verifying source file: "$FontPath""
+Write-Log "Checking for font $FontName..."
+Write-Host "Checking for font $FontName..."
 
 if (Get-ItemProperty -Path $regPath -Name $FontName -ErrorAction SilentlyContinue) {
     Write-Output "Font '$FontName' is installed."
+    Write-Log "Font '$FontName' is installed."
     exit 0
 } else {
     Write-Output "Font '$FontName' is NOT installed."
+    Write-Log "Font '$FontName' is NOT installed."
     exit 1
 }
