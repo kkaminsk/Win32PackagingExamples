@@ -4,7 +4,6 @@
 $applicationname = "Detect-RobotoFontFile"
 $packageversion = "R1"
 $date = Get-Date -Format "yyyy-MM-dd"
-$FontPath = ".\Roboto.ttf"
 $FontName = "Roboto.ttf"
 $FontsFolder = "$env:windir\Fonts"
 $FontsFolderPath = "$FontsFolder\$FontName"
