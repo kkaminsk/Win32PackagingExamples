@@ -71,7 +71,7 @@ if (Test-Path -Path $registrypath) {
 }
 
 # Check if the lock screen image exists
-if (Test-Path -Path $lockscreenFile) {
+if (Test-Path -Path $file) {
     Write-Log "File exists: $file"
     Write-Host "File exists: $file"
     exit 0
