@@ -23,29 +23,6 @@ function Write-Log {
 Write-Log "Searching for $file."
 Write-Host "Searching for $file."
 
-# Read and compare version from the registry
-if (Test-Path -Path $registrypath) {
-    $existingversion = (Get-ItemProperty -Path $registrypath -Name "Version" -ErrorAction SilentlyContinue).Version
-    if ($ExistingVersion) {
-        Write-Log "Existing version found in registry: $existingversion"
-        Write-Host "Existing version found in registry: $existingversion"
-        exit 0
-
-        if ([version]$version -le [version]$existingversion) {
-            Write-Log "Current version ($version) is not greater than existing version ($existingversion). Exiting."
-            Write-Host "Current version ($version) is not greater than existing version ($existingversion). Exiting."
-            exit 1
-        }
-    } else {
-        Write-Log "No existing version found in registry."
-        Write-Host "No existing version found in registry."
-        exit 1
-    }
-} else {
-    Write-Log "Registry path does not exist: $registrypath"
-    Write-Host "Registry path does not exist: $registrypath"
-}
-
 # Read and compare package version from the registry
 if (Test-Path -Path $registrypath) {
     $existingpackageVersion = (Get-ItemProperty -Path $registrypath -Name "PackageVersion" -ErrorAction SilentlyContinue).PackageVersion
@@ -71,6 +48,14 @@ if (Test-Path -Path $registrypath) {
     Write-Log "Registry path does not exist: $registrypath"
     Write-Host "Registry path does not exist: $registrypath"
 }
+
+# Ensure the registry path exists
+if (-not (Test-Path -Path $registrypath)) {
+    New-Item -Path $registrypath -Force | Out-Null
+}
+
+# Create or update the registry value
+New-ItemProperty -Path $registrypath -Name 'PackageVersion' -Value $packageversion -PropertyType String -Force
 
 # Check if the safe exam browser file exists
 if (Test-Path -Path $file) {
