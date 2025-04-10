@@ -1,6 +1,3 @@
-# Define the path to the target application
-$targetPath = "C:\Program Files\SafeExamBrowser\Application\SafeExamBrowser.exe"
-
 # Define the working directory
 $workingDirectory = "C:\Program Files\SafeExamBrowser\Application\"
 
