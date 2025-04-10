@@ -35,9 +35,8 @@ if (Test-Path -Path $registrypath) {
         $currentversionnumber = [int]($packageversion -replace "[^0-9]", "")
 
         if ($currentversionnumber -le $existingversionnumber) {
-            Write-Log "Current package version ($packageversion) is not greater than existing package version ($existingpackageversion). Exiting."
-            Write-Host "Current package version ($packageversion) is not greater than existing package version ($existingpackageversion). Exiting."
-            exit 1
+            Write-Log "Current package version ($packageversion) is not greater than existing package version ($existingpackageversion). Checking for file."
+            Write-Host "Current package version ($packageversion) is not greater than existing package version ($existingpackageversion). Checking for file."
         }
     } else {
         Write-Log "No existing package version found in registry."
